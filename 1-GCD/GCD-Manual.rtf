@@ -1,0 +1,305 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red31\green32\blue41;\red225\green226\blue231;\red215\green0\blue143;
+\red37\green144\blue141;\red69\green187\blue62;\red211\green35\blue46;\red29\green169\blue162;\red81\green36\blue227;
+\red175\green93\blue56;\red20\green156\blue146;}
+{\*\expandedcolortbl;;\csgenericrgb\c12157\c12549\c16078;\csgenericrgb\c88217\c88535\c90427;\csgenericrgb\c84398\c0\c55980;
+\csgenericrgb\c14440\c56530\c55465;\csgenericrgb\c26985\c73392\c24249;\csgenericrgb\c82745\c13725\c18039;\csgenericrgb\c11560\c66089\c63506;\csgenericrgb\c31805\c14233\c89143;
+\csgenericrgb\c68478\c36349\c21894;\csgenericrgb\c7843\c61177\c57255;}
+\margl1440\margr1440\vieww30000\viewh15440\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs36 \cf0 \
+\
+GCD Ejemplo\
+http://www.migueldiazrubio.com/desarrollo-ios-6-blocks-y-gcd-grand-central-dispatch/\
+\
+https://www.dit.upm.es/~santiago/docencia/ios/2000-14/130-Concurrencia_y_Usabilidad-20140518.pdf\
+\
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 EJERCICIO DE GCD\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\fs24 \cf0 \cb2 \
+\pard\tx1038\pardeftab1038\pardirnatural\partightenfactor0
+
+\f1\fs42 \cf3 - (
+\fs38 \cf4 IBAction
+\fs42 \cf3 )btnMainThread:(
+\fs38 \cf5 UIButton
+\fs42 \cf3  *)sender \{
+\f0\fs24 \cf0 \
+
+\f1\fs42 \cf3     
+\f0\fs24 \cf0 \
+
+\f1\fs42 \cf3     
+\fs38 \cf6 // Creamos la URL para nuestra imagen
+\f0\fs24 \cf0 \
+
+\f1\fs42 \cf3     
+\fs38 \cf5 NSURL
+\fs42 \cf3  *URL = [
+\fs38 \cf5 NSURL
+\fs42 \cf3  
+\fs38 \cf5 URLWithString
+\fs42 \cf3 :
+\fs38 \cf7 @"https://wallpaperclicker.com/storage/wallpaper/High-Definition-Ultra-HD-Wallpaper-96262544.jpg"
+\fs42 \cf3 ];
+\f0\fs24 \cf0 \
+
+\f1\fs42 \cf3     
+\f0\fs24 \cf0 \
+
+\f1\fs42 \cf3     
+\fs38 \cf6 // Obtenemos los datos de la imagen
+\f0\fs24 \cf0 \
+
+\f1\fs42 \cf3     
+\fs38 \cf5 NSData
+\fs42 \cf3  *dataImage = [
+\fs38 \cf5 NSData
+\fs42 \cf3  
+\fs38 \cf5 dataWithContentsOfURL
+\fs42 \cf3 :URL];
+\f0\fs24 \cf0 \
+
+\f1\fs42 \cf3     
+\f0\fs24 \cf0 \
+
+\f1\fs42 \cf3     
+\fs38 \cf6 // Creamos una imagen con los datos obtenidos
+\f0\fs24 \cf0 \
+
+\f1\fs42 \cf3     
+\fs38 \cf5 UIImage
+\fs42 \cf3  *image = [[
+\fs38 \cf5 UIImage
+\fs42 \cf3  
+\fs38 \cf5 alloc
+\fs42 \cf3 ] 
+\fs38 \cf5 initWithData
+\fs42 \cf3 :dataImage];
+\f0\fs24 \cf0 \
+
+\f1\fs42 \cf3     
+\f0\fs24 \cf0 \
+
+\f1\fs42 \cf3     
+\fs38 \cf6 //Asignamos al UIImage de nuestra vista dicho UIImage
+\f0\fs24 \cf0 \
+
+\f1\fs42 \cf3     
+\fs38 \cf8 _imgView
+\fs42 \cf3 .
+\fs38 \cf5 image
+\fs42 \cf3  = image;
+\f0\fs24 \cf0 \
+
+\f1\fs42 \cf3     
+\f0\fs24 \cf0 \
+
+\f1\fs42 \cf3 \}
+\f0\fs24 \cf0 \
+\
+
+\f1\fs42 \cf3 - (
+\fs38 \cf4 IBAction
+\fs42 \cf3 )btnBackground:(
+\fs38 \cf5 UIButton
+\fs42 \cf3  *)sender \{
+\f0\fs24 \cf0 \
+
+\f1\fs42 \cf3     
+\fs38 \cf6 // Creamos la URL para nuestra imagen
+\f0\fs24 \cf0 \
+
+\f1\fs38 \cf6 //    NSURL *URL = [NSURL URLWithString:@&amp;quot;\cf9 http://www.kennethprimrose.co.uk/wp-content/uploads/2011/06/Scottish-landscape.jpg&amp;quot;\cf6 ];
+\f0\fs24 \cf0 \
+
+\f1\fs42 \cf3     
+\f0\fs24 \cf0 \
+
+\f1\fs42 \cf3      
+\fs38 \cf6 // Obtenemos la cola de segundo plano
+\f0\fs24 \cf0 \
+
+\f1\fs42 \cf3      
+\fs38 \cf5 dispatch_queue_t
+\fs42 \cf3  backgroundQueue = 
+\fs38 \cf5 dispatch_get_global_queue
+\fs42 \cf3 (
+\fs38 \cf10 DISPATCH_QUEUE_PRIORITY_BACKGROUND
+\fs42 \cf3 , 
+\fs38 \cf11 0
+\fs42 \cf3 );
+\f0\fs24 \cf0 \
+\
+
+\f1\fs42 \cf3                   
+\fs38 \cf6 // Invocamos en modo as\'edncrono un bloque en la cola que hemos recuperado
+\f0\fs24 \cf0 \
+
+\f1\fs42 \cf3      
+\fs38 \cf5 dispatch_async
+\fs42 \cf3 (backgroundQueue, ^\{
+\f0\fs24 \cf0 \
+
+\f1\fs42 \cf3         
+\f0\fs24 \cf0 \
+
+\f1\fs42 \cf3         
+\fs38 \cf6 // Obtenemos los datos de la imagen (esto tardara un poco al
+\f0\fs24 \cf0 \
+
+\f1\fs42 \cf3         
+\fs38 \cf6 // tratarse de una imagen de alta resoluci\'f3n)
+\f0\fs24 \cf0 \
+
+\f1\fs38 \cf6 //        NSData *dataImagen = [NSData dataWithContentsOfURL:URL];
+\f0\fs24 \cf0 \
+
+\f1\fs42 \cf3         
+\f0\fs24 \cf0 \
+
+\f1\fs42 \cf3         
+\fs38 \cf6 // Creamos un UIImage con los datos obtenidos
+\f0\fs24 \cf0 \
+
+\f1\fs38 \cf6 //        UIImage *imagen = [[UIImage alloc] initWithData:dataImagen];
+\f0\fs24 \cf0 \
+
+\f1\fs42 \cf3         
+\f0\fs24 \cf0 \
+
+\f1\fs42 \cf3         
+\fs38 \cf5 dispatch_async
+\fs42 \cf3 (
+\fs38 \cf5 dispatch_get_main_queue
+\fs42 \cf3 (), ^\{
+\f0\fs24 \cf0 \
+
+\f1\fs42 \cf3             
+\f0\fs24 \cf0 \
+
+\f1\fs42 \cf3             
+\fs38 \cf6 // Asignamos al UIImageView de nuestra vista dicho UIImage
+\f0\fs24 \cf0 \
+
+\f1\fs38 \cf6 //            _imgView.image = imagen;
+\f0\fs24 \cf0 \
+
+\f1\fs42 \cf3             
+\f0\fs24 \cf0 \
+
+\f1\fs42 \cf3         \});
+\f0\fs24 \cf0 \
+
+\f1\fs42 \cf3         
+\f0\fs24 \cf0 \
+
+\f1\fs42 \cf3     \});
+\f0\fs24 \cf0 \
+
+\f1\fs42 \cf3     
+\f0\fs24 \cf0 \
+
+\f1\fs42 \cf3 \}
+\f0\fs24 \cf0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\fs36 \cf0 \cb1 \
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+}
